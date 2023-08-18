@@ -1,0 +1,3 @@
+Flask == 2.3.2
+
+#dps de activar el venv, poner la version de todas las librerías

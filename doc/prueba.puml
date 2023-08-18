@@ -1,0 +1,45 @@
+@startuml sistema-alquileres
+
+class Inquilino {
+    - nombre
+    - apellido
+    - teléfono
+    - recibo_sueldo
+}
+
+class Locador {
+    - nombre
+    - apellido
+}
+
+class Garante {
+    - nombre
+    - apellido
+    - teléfono
+    - dirección
+    - recibo_sueldo
+}
+
+class Contrato {
+    - fecha_inicio
+    - fecha_finalización
+    - duración
+    - vigencia
+}
+
+class Departamento {
+    - tamaño
+    - cantidad_habitaciones
+    - prestaciones
+    - disponibilidad
+    - amoblamiento
+    - arrendamiento
+    - dirección
+}
+
+Locador -- Contrato
+Contrato -- Inquilino
+Contrato -- Departamento
+Inquilino -- Garante
+
+@enduml
