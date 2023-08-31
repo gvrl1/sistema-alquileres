@@ -1,0 +1,36 @@
+@startuml sistema-alquileres
+
+class User {
+    - name
+    - lastname
+    - phone_number
+    - email_address
+}
+
+class Role {
+    - description
+}
+
+class Booking {
+    - start_booking
+    - finish_booking
+    - duration
+    - num_booking
+    - amount_people
+}
+
+class Apartment {
+    - number
+    - size
+    - amount_rooms
+    - features
+    - availability
+    - lease
+    - address
+}
+
+Booking -- User
+Booking -- Apartment
+User -- Role
+
+@enduml
