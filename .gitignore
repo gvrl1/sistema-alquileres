@@ -127,3 +127,9 @@ Desktop.ini
 # Thumbnails
 ._*
 Thumbs.db
+
+# Vscode settings
+*.code-workspace
+
+# Database
+migrations/
