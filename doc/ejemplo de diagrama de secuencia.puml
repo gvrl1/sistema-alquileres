@@ -1,0 +1,20 @@
+'Hay que hacer un diagrama de secuencia y clase para cada elemento del CRUD
+
+@startuml
+
+'Ejemplo
+'ver disponibilidad
+
+
+actor cliente
+
+cliente -> Service: ver disponibilidad de reserva
+Service -> Repositorio: validar datos
+database BD
+Repositorio -> BD: validar datos
+Repositorio <- BD: persistiendo
+Service <- Repositorio: Persistir
+cliente <- Service: Persistido
+
+@enduml
+

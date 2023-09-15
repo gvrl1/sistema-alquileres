@@ -1,0 +1,24 @@
+'Hay que hacer un diagrama de secuencia y clase para cada elemento del CRUD
+
+@startuml Crear reserva
+
+'Ejemplo
+'crear reserva
+
+
+actor cliente
+
+
+cliente -> resource: blueprint reserva
+resource -> service: solicita crear reserva
+
+service -> repositories: comunicarse con el repositorio de reservas
+database BD
+repositories -> BD: crear reserva en BD
+repositories <- BD: confirmacion de reserva creada
+service <- repositories: confirmacion de reserva creada
+resource <- service: confirmacion de reserva creada
+cliente <- resource: confirmacion de reserva creada
+
+@enduml
+

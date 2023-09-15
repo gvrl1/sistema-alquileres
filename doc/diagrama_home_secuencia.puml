@@ -1,0 +1,18 @@
+'Hay que hacer un diagrama de secuencia y clase para cada elemento del CRUD
+
+@startuml /home
+
+'Ejemplo
+'ver disponibilidad
+
+
+actor cliente
+
+
+cliente -> resource: ir a home
+'cliente <- resource: redirige a home
+resource -> repositories: busca a home
+repositories -> resource: devuelve a home
+resource -> cliente: muestra home
+@enduml
+
