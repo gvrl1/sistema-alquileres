@@ -1,9 +1,9 @@
 from app.models import User
 from app import db
-from app.repositories import Create, Read, Update, Delete
+# from app.repositories import Create, Read, Update, Delete
 
-class UserRepository(Create, Read, Update, Delete):
-    
+# class UserRepository(Create, Read, Update, Delete):
+class UserRepository:
     def __init__(self):
         self.__model = User
 

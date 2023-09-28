@@ -1,13 +1,13 @@
-from app import db
+from .. import db
 from sqlalchemy.ext.hybrid import hybrid_property
 
-class Booking():
+class Booking(db.Model):
     __tablename__ = 'bookings'
-    __id = db.column('id', db.Integer, primary_key=True, autoincrement=True)
-    __start_booking = db.column('start_booking', db.DateTime(100))
-    __finish_booking = db.column('finish_booking',db.DateTime(100))
-    __duration = db.column('duration', db.Integer)
-    __amount_people = db.column('amount_people',db.Integer)
+    __id = db.Column('id', db.Integer, primary_key=True, autoincrement=True)
+    __start_booking = db.Column('start_booking', db.DateTime(100))
+    __finish_booking = db.Column('finish_booking',db.DateTime(100))
+    __duration = db.Column('duration', db.Integer)
+    __amount_people = db.Column('amount_people',db.Integer)
     # TODO: Agregar clave foránea hacia la tabla de usuarios (user_id)
     # TODO: Agregar clave foránea hacia la tabla de apartamentos (apartment_id)
 

@@ -1,35 +1,35 @@
-from app import ABC, abstractmethod
-from app import db
+# from app import ABC, abstractmethod
+# from app import db
 
 
-class Create(ABC):
+# class Create(ABC):
 
-    @abstractmethod
-    def create(self, entity: db.Model):
-        pass
+#     @abstractmethod
+#     def create(self, entity: db.Model):
+#         pass
 
-class Read(ABC):
+# class Read(ABC):
 
-    @abstractmethod
-    def find_all(self):
-        pass
+#     @abstractmethod
+#     def find_all(self):
+#         pass
 
-    @abstractmethod
-    def find_by_id(self, id: int):
-        pass
+#     @abstractmethod
+#     def find_by_id(self, id: int):
+#         pass
 
-    @abstractmethod
-    def find_by_username(self, username: str):
-        pass
+#     @abstractmethod
+#     def find_by_username(self, username: str):
+#         pass
 
-class Update(ABC):
+# class Update(ABC):
 
-    @abstractmethod
-    def update(self, entity: db.Model, id: int):
-        pass
+#     @abstractmethod
+#     def update(self, entity: db.Model, id: int):
+#         pass
 
-class Delete(ABC):
+# class Delete(ABC):
 
-    @abstractmethod
-    def delete(self, id: int):
-        pass
+#     @abstractmethod
+#     def delete(self, id: int):
+#         pass

@@ -1,7 +1,7 @@
 from .. import db
 from sqlalchemy.ext.hybrid import hybrid_property
 
-class User: 
+class User(db.Model): 
     __tablename__ ='users'
     __id = db.Column('id', db.Integer, primary_key=True, autoincrement=True)
     __name = db.Column('name', db.String(100))
