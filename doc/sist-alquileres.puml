@@ -5,9 +5,11 @@ class User {
     - lastname
     - phone_number
     - email_address
+    - password
 }
 
 class Role {
+    - name
     - description
 }
 
@@ -15,12 +17,11 @@ class Booking {
     - start_booking
     - finish_booking
     - duration
-    - num_booking
     - amount_people
 }
 
 class Apartment {
-    - number
+    - number_of_apartment
     - size
     - amount_rooms
     - features

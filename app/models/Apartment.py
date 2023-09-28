@@ -3,18 +3,18 @@ from sqlalchemy.ext.hybrid import hybrid_property
 
 class Apartment(db.Model):
     __tablename__ = 'apartments'
-    id = db.Column('Id', db.Integer, primary_key=True, autoincrement=True)
-    number = db.Column('Number', db.Integer)
-    size = db.Column('Size', db.Integer)
-    amount_rooms = db.Column('Amount_rooms',db.Integer)
-    features = db.Column('Features', db.String(500))
-    availability = db.Column('Availability',db.Boolean)
-    lease = db.Column('Lease', db.Float)
-    address = db.Column('Address', db.String(150))
+    __id = db.Column('id', db.Integer, primary_key=True, autoincrement=True)
+    __number_of_apartment = db.Column('number_of_apartment', db.Integer)
+    __size = db.Column('size', db.Integer)
+    __amount_rooms = db.Column('amount_rooms',db.Integer)
+    __features = db.Column('features', db.String(500))
+    __availability = db.Column('availability',db.Boolean)
+    __lease = db.Column('lease', db.Float)
+    __address = db.Column('address', db.String(150))
 
     """Constructor
     Atributos:
-        number (int): Número del apartamento, máximo 3 dígitos.
+        number_of_apartment (int): Número del apartamento, máximo 3 dígitos.
         size (int): Tamaño del apartamento, máximo 3 dígitos.
         amount_rooms (int): Cantidad de habitaciones del apartamento, máximo 3 dígitos.
         features (str): Características del apartamento, máximo 500 caracteres.	
@@ -23,8 +23,8 @@ class Apartment(db.Model):
         address (str): Dirección del apartamento, máximo 150 caracteres.
     """
     
-    def __init__(self, number: int, size: int, amount_rooms: int, features: str, availability: bool, lease: float, address: str):
-        self.__number = number
+    def __init__(self, number_of_apartment: int, size: int, amount_rooms: int, features: str, availability: bool, lease: float, address: str):
+        self.__number_of_apartment = number_of_apartment
         self.__size = size
         self.__amount_rooms = amount_rooms
         self.__features = features
@@ -40,11 +40,11 @@ class Apartment(db.Model):
         self.__id = id
     
     @hybrid_property
-    def number(self) -> int:
-        return self.__number
-    @number.setter
-    def number(self, number: int):
-        self.__number = number
+    def number_of_apartment(self) -> int:
+        return self.__number_of_apartment
+    @number_of_apartment.setter
+    def number_of_apartment(self, number_of_apartment: int):
+        self.__number_of_apartment = number_of_apartment
 
     @hybrid_property
     def size(self) -> int:
@@ -89,8 +89,8 @@ class Apartment(db.Model):
         self.__address = address
 
     def __repr__(self) -> str:
-        return f'Apartment(number={self.number}, size={self.size}, amount_rooms={self.amount_rooms}, features={self.features}, availability={self.availability}, lease={self.lease}, address={self.address})'
+        return f'Apartment(number_of_apartment={self.__number_of_apartment}, size={self.__size}, amount_rooms={self.__amount_rooms}, features={self.__features}, availability={self.__availability}, lease={self.__lease}, address={self.__address})'
 
     # ¿Cuándo un apartamento es igual?
     def __eq__(self, __value: object) -> bool:
-        return self.number == __value.number
+        return self.__number_of_apartment == __value.__number_of_apartment
