@@ -8,7 +8,7 @@ class UserSchema(Schema):
     lastname = fields.Str(required=True, validate=validate.Length(min=1, max=100))
     phone_number = fields.Str(required=True, validate=validate.Length(min=1, max=15))
     email_address = fields.Str(required=True, validate=validate.Email())
-    # password = fields.Str()
+    password = fields.Str(load_only=True)
     data = fields.Nested('UserDataSchema')
     
     @post_load

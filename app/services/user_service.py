@@ -1,6 +1,6 @@
 from app.models import User
 from app.repositories import UserRepository
-from werkzeug.security import generate_password_hash
+from app.services import SecurityService
 
 """
 En este servicio van todas las funciones referidas al usuario.
@@ -12,8 +12,11 @@ class UserService:
     def __init__(self):
         self.__repo = UserRepository()
 
+    # def exist_by_id(self, id: int) -> bool:
+    #     return self.__repo.exist_by_id(id)
+    
     def create(self, entity: User) -> User:
-        entity.password = generate_password_hash(entity.password)
+        entity.password = SecurityService.generate_password(entity.password)
         return self.__repo.create(entity)
     
     # def update(self, entity: User, id: int) -> User:

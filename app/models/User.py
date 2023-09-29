@@ -7,8 +7,8 @@ class User(db.Model):
     __name = db.Column('name', db.String(100))
     __lastname = db.Column('lastname', db.String(100))
     __phone_number = db.Column('phone_number', db.String(15))
-    __email_address = db.Column('email_address', db.String(100))
-    __password = db.Column('password', db.String(25))
+    __email_address = db.Column('email_address', db.String(100), unique=True)
+    __password = db.Column('password', db.String(255))
     # TODO: Agregar clave foránea hacia la tabla de roles (role_id)
 
     """ Constructor
@@ -17,7 +17,7 @@ class User(db.Model):
         lastname (str): Apellido del usuario, máximo 100 caracteres.
         phone_number (str): Número de teléfono del usuario, máximo 15 dígitos.
         email_address (str): Dirección de correo electrónico del usuario, máximo 100 caracteres.
-        password (str): Contraseña del usuario, máximo 25 caracteres.
+        password (str): Contraseña del usuario, hash encriptado.
     """
 
     def __init__(self, name: str, lastname: str, phone_number: str, email_address: str, password: str):
