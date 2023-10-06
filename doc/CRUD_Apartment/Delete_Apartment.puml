@@ -1,0 +1,16 @@
+@startuml Diagrama de secuencia - Eliminar departamento por id
+
+actor Usuario
+Usuario -> ApartmentResource: solicita eliminar un departamento
+ApartmentResource -> ApartmentService: envía id y solicita servicio delete
+ApartmentService -> ApartmentRepository: solicita eliminar departamento en base de datos
+database AlquileresDB
+ApartmentRepository -> AlquileresDB: elimina departamento en DB
+AlquileresDB -> ApartmentRepository: confirma eliminación
+ApartmentRepository -> ApartmentService: retorna entidad eliminada
+ApartmentService -> ApartmentResource: retorna entidad eliminada
+ApartmentResource -> ApartmentSchema: solicita deserelización de entidad
+ApartmentSchema -> ApartmentResource: retorna entidad deserealizada
+ApartmentResource -> Usuario: muestra departamento eliminado
+
+@enduml

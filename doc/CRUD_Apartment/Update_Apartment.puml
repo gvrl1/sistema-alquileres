@@ -1,0 +1,18 @@
+@startuml Diagrama de secuencia - Actualización de un departamento
+
+actor Usuario
+Usuario -> ApartmentResource: solicita actualizar un apartamento
+ApartmentResource -> ApartmentSchema: valida los datos y convierte a entidad
+ApartmentSchema -> ApartmentResource: retorna entidad
+ApartmentResource -> ApartmentService: envia entidad + id y solicita servicio update
+ApartmentService -> ApartmentRepository: envia entidad + id y solicita actualizar en tabla Apartment
+database AlquileresDB
+ApartmentRepository -> AlquileresDB: actualiza en tabla Apartment
+AlquileresDB -> ApartmentRepository: envía confirmación
+ApartmentRepository -> ApartmentService: retorna entidad actualizada
+ApartmentService -> ApartmentResource: retorna entidad actualizada
+ApartmentResource -> ApartmentSchema: solicita deserializar la entidad
+ApartmentSchema -> ApartmentResource: retorna la entidad deserializada
+ApartmentResource -> Usuario: muestra json de apartamento actualizado
+
+@enduml

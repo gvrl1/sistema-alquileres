@@ -23,19 +23,21 @@ user_service = UserService()
 #     resp.status_code = 200
 #     return jsonify(resp)
 
-# @user.route('/<int:id>', methods=['GET'])
-# def find_id():
-#     # Devolver un cliente
-#     
-#     return
-
-@user.route('/singup', methods=['POST'])
-def singup():
-    # Crear un cliente
+@user.route('/findbyid/<int:id>', methods=['GET'])
+def find_by_id():
+    # Devolver un cliente
     try:
-        data = request.get_json()
-        user = user_schema.load(data)
-        user = user_service.create(user)
-        return user_schema.dump(user), 201
+        return {"user": user_schema.dump(user_service.find_by_id(id))}, 200
     except Exception as e:
         return jsonify(e), 400
+    
+
+@user.route('/create', methods=['POST'])
+def create():
+    # Crear un cliente
+    try:
+        user = user_schema.load(request.json)
+        return {"user": user_schema.dump(user_service.create(user))}, 200
+    except Exception as e:
+        e = str(e)
+        return jsonify(f"{e}"), 400

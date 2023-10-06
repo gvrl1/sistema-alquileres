@@ -1,6 +1,6 @@
 from app.models import User
 from app.repositories import UserRepository
-from app.services import SecurityService
+from .security_service import SecurityService
 
 """
 En este servicio van todas las funciones referidas al usuario.

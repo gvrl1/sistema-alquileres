@@ -20,8 +20,9 @@ def create_app():
     migrate = Migrate()
     migrate.init_app(app, db)
 
-    from app.resources import home, user
+    from app.resources import home, user, apartment
     app.register_blueprint(home, url_prefix='/api/v1/home')
     app.register_blueprint(user, url_prefix='/api/v1/user')
+    app.register_blueprint(apartment, url_prefix='/api/v1/apartment')
 
     return app

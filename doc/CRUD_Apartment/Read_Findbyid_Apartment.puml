@@ -1,0 +1,16 @@
+@startuml Diagrama de secuencia - Búsqueda de departamento por id
+
+actor Usuario
+Usuario -> ApartmentResource: solicita la búsqueda de un departamento por id
+ApartmentResource -> ApartmentService: envía id y solicita servicio find_by_id
+ApartmentService -> ApartmentRepository: solicita la búsqueda en la base de datos
+database AlquileresDB
+ApartmentRepository -> AlquileresDB: realiza la búsqueda en la base de datos
+AlquileresDB -> ApartmentRepository: devuelve el departamento encontrado
+ApartmentRepository -> ApartmentService: devuelve el departamento encontrado
+ApartmentService -> ApartmentResource: devuelve el departamento encontrado
+ApartmentResource -> ApartmentSchema: solicita deserializar entidad
+ApartmentSchema -> ApartmentResource: devuelve entidad deserializada
+ApartmentResource -> Usuario: devuelve el departamento encontrado
+
+@enduml
