@@ -1,0 +1,22 @@
+@startuml Diagrama de Secuencia - Creación de rol
+
+actor Administrador
+
+Admininistrador -> role_resource: Solicitar creación de rol.
+role_resource -> role_schema: Validar datos y crear objeto rol.
+role_schema -> role_resource: Devolver objeto rol.
+
+role_resource -> role_service: Solicitar servicio create.
+role_service -> role_repository: Persistir objeto rol.
+
+database AlquileresDB
+
+role_repository -> AlquileresDB: Enviar SQL para agregar objeto rol a la DB.
+AlquileresDB -> role_repository: Confirmación de agregado.
+role_repository -> role_service: Envía la entidad creada.
+role_service -> role_resource: Envía la entidad creada.
+role_resource -> role_schema: Solicita convertir de objeto a JSON la entidad creada.
+role_schema -> role_resource: Devuelve JSON de la entidad creada.
+role_resource -> Administrador: Muestra el rol creado.
+
+@enduml

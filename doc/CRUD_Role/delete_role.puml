@@ -1,0 +1,19 @@
+@startuml Diagrama de Secuencia - Elimminación de rol
+
+actor Administrador
+
+Administrador -> role_resource: solicita eliminar rol.
+role_resource -> role_service: envía id y solicita servicio Delete.
+role_service -> role_repository: solicita eliminar rol en la base de datos.
+
+database AlquileresDB
+
+role_repository -> AlquileresDB: elimina rol en DB.
+AlquileresDB -> role_repository: confirma eliminación.
+role_repository -> role_service: retorna rol eliminado.
+role_service -> role_resource: retorna rol eliminado.
+role_resource -> role_schema: solicita deserialización del objeto.
+role_schema -> role_resource: retorna objeto deserializado.
+role_resource -> Administrador: muestra rol eliminado.
+
+@enduml

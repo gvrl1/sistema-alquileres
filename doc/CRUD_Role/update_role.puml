@@ -1,0 +1,21 @@
+@startuml Diagrama de Secuencia - Actualización de rol
+
+actor Administrador
+
+Administrador -> role_resource: solicita actualizar rol.
+role_resource -> role_schema: verifica los datos y convierte a objeto.
+role_schema -> role_resource: devuelve el objeto.
+role_resource -> role_service: envia el objeto + id y solicita servicio Update.
+role_service -> role_repository: envia el objeto + id y solicita actualizar en tabla Role.
+
+database AlquileresDB
+
+role_repository -> AlquileresDB: actualiza el rol en la tabla Role.
+AlquileresDB -> role_repository: confirma actualización.
+role_repository -> role_service: retorna el objeto actualizado.
+role_service -> role_resource: retorna el objeto actualizado.
+role_resource -> role_schema: solicita convertir el objeto a json.
+role_schema -> role_resource: retorna el objeto en json.
+role_resource -> Administrador: retorna el rol actualizado.
+
+@enduml
