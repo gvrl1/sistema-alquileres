@@ -13,7 +13,6 @@ def create_app():
     ma.init_app(app)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = FULL_URL_DB
-    print(FULL_URL_DB)
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
