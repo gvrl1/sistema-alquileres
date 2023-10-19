@@ -1,0 +1,16 @@
+@startuml Diagrama de secuencia - Búsqueda de reserva por id
+
+actor Usuario
+Usuario -> BookingResource: solicita la búsqueda de un reserva por id
+BookingResource -> BookingService: envía id y solicita servicio find_by_id
+BookingService -> BookingRepository: solicita la búsqueda en la base de datos
+database AlquileresDB
+BookingRepository -> AlquileresDB: realiza la búsqueda en la base de datos
+AlquileresDB -> BookingRepository: devuelve el reserva encontrado
+BookingRepository -> BookingService: devuelve el reserva encontrado
+BookingService -> BookingResource: devuelve el reserva encontrado
+BookingResource -> BookingSchema: solicita deserializar entidad
+BookingSchema -> BookingResource: devuelve entidad deserializada
+BookingResource -> Usuario: devuelve el reserva encontrado
+
+@enduml

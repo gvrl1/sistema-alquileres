@@ -4,6 +4,7 @@ from flask_cors import CORS
 from app.config.database import db, FULL_URL_DB
 from flask_marshmallow import Marshmallow
 
+
 ma = Marshmallow()
 
 def create_app():
@@ -12,6 +13,7 @@ def create_app():
     ma.init_app(app)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = FULL_URL_DB
+    print(FULL_URL_DB)
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -20,10 +22,11 @@ def create_app():
     migrate = Migrate()
     migrate.init_app(app, db)
 
-    from app.resources import home, user, role, apartment
+    from app.resources import home, user, role, apartment, booking
     app.register_blueprint(home, url_prefix='/api/v1/home')
     app.register_blueprint(user, url_prefix='/api/v1/user')
     app.register_blueprint(apartment, url_prefix='/api/v1/apartment')
     app.register_blueprint(role, url_prefix='/api/v1/role')
+    app.register_blueprint(booking, url_prefix='/api/v1/booking')
 
     return app

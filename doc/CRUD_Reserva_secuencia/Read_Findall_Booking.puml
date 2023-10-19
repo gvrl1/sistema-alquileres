@@ -1,0 +1,18 @@
+
+@startuml Diagrama de secuencia - Búsqueda de todas las reservas
+
+actor Usuario
+Usuario -> BookingResource: solicita la búsqueda de todas las reservas
+BookingResource -> BookingService: solicita servicio find_all
+BookingService -> BookingRepository: solicita la búsqueda en la base de datos
+database AlquileresDB
+BookingRepository -> AlquileresDB: realiza la búsqueda en la base de datos
+AlquileresDB -> BookingRepository: devuelve todas las reservas
+BookingRepository -> BookingService: devuelve todas las reservas
+BookingService -> BookingResource: devuelve todas las reservas
+BookingResource -> BookingSchema: solicita deserializar entidad
+BookingSchema -> BookingResource: devuelve entidad deserializada
+BookingResource -> Usuario: devuelve todas las reservas
+
+@enduml
+

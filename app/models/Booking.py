@@ -13,8 +13,8 @@ class Booking(db.Model):
 
     """Constructor
     Atributos:
-        start_booking (str): Fecha de inicio de la reserva, máximo 100 caracteres.
-        finish_booking (str): Fecha de finalización de la reserva, máximo 100 caracteres.
+        start_booking (str): Fecha de inicio de la reserva, máximo 100 caracteres, formato: "YYYY-MM-DDTHH:mm:ss.sss".
+        finish_booking (str): Fecha de finalización de la reserva, máximo 100 caracteres formato "YYYY-MM-DDTHH:mm:ss.sss".
         duration (int): Duración de la reserva, máximo 3 dígitos.
         amount_people (int): Cantidad de personas de la reserva, máximo 3 dígitos.
     """

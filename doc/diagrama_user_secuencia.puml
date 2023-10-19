@@ -1,0 +1,21 @@
+
+@startuml diagrama de secuencia usuario
+
+
+actor usuario
+usuario -> UsuarioResource: Registrar Usuario
+UsuarioResource -> user_schema: solicita la clase Userschema
+UsuarioResource <- user_schema: user_schema (para validar y deserealizar)
+UsuarioResource -> UsuarioService: Solicita la clase user_service
+UsuarioService -> UsuarioRepository: Solicita la clase UsuarioRepository
+database DB
+UsuarioRepository -> DB: Solicita crear usuario en base de datos
+DB -> UsuarioRepository: usuario creado (o no)
+UsuarioRepository -> UsuarioService: usuario creado (o no)
+UsuarioService -> UsuarioResource: usuario creado (o no)
+UsuarioResource -> usuario: usuario creado (o no)
+
+
+
+@enduml
+
