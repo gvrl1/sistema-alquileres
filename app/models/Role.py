@@ -1,11 +1,13 @@
 from .. import db
 from sqlalchemy.ext.hybrid import hybrid_property
+from .relationships import association_table
 
 class Role(db.Model):
     __tablename__ = 'roles'
     __id = db.Column('id', db.Integer, primary_key=True, autoincrement=True)
     __name = db.Column('name', db.String(100))
     __description = db.Column('description', db.String(100))
+    users = db.relationship("User", secondary=association_table, back_populates='roles')
 
     """ Constructor
     Atributos:

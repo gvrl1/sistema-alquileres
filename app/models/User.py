@@ -1,5 +1,6 @@
 from .. import db
 from sqlalchemy.ext.hybrid import hybrid_property
+from .relationships import association_table
 
 class User(db.Model): 
     __tablename__ ='users'
@@ -9,7 +10,8 @@ class User(db.Model):
     __phone_number = db.Column('phone_number', db.String(15))
     __email_address = db.Column('email_address', db.String(100), unique=True)
     __password = db.Column('password', db.String(255))
-    # TODO: Agregar clave foránea hacia la tabla de roles (role_id)
+    roles = db.relationship('Role', secondary=association_table, back_populates='users')
+    user_bookings = db.relationship('Booking', backref='user')
 
     """ Constructor
     Atributos: 

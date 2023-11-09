@@ -11,6 +11,7 @@ class Apartment(db.Model):
     __availability = db.Column('availability',db.Boolean)
     __lease = db.Column('lease', db.Float)
     __address = db.Column('address', db.String(150))
+    apartment_bookings = db.relationship('Booking', backref='apartment')
 
     """Constructor
     Atributos:

@@ -16,7 +16,6 @@ class UserService:
     #     return self.__repo.exist_by_id(id)
     
     def create(self, entity: User) -> User:
-        entity.password = SecurityService.generate_password(entity.password)
         return self.__repo.create(entity)
     
     # def update(self, entity: User, id: int) -> User:
@@ -28,10 +27,12 @@ class UserService:
     # def find_by_username(self, username: str) -> User:
     #     return self.__repo.find_by_username(username)
     
-    # def find_by_id(self, id: int) -> User:
-    #     return self.__repo.find_by_id(id)
+    def find_by_id(self, id: int) -> User:
+        return self.__repo.find_by_id(id)
     
     # # Puede ir en otro módulo
     # def check_auth(self, username, password):
     #     pass
     
+    def find_by_email(self, email: str) -> User:
+        return self.__repo.find_by_email(email)

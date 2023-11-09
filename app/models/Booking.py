@@ -4,12 +4,12 @@ from sqlalchemy.ext.hybrid import hybrid_property
 class Booking(db.Model):
     __tablename__ = 'bookings'
     __id = db.Column('id', db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
+    apartment_id = db.Column('apartment_id', db.Integer, db.ForeignKey('apartments.id'))
     __start_booking = db.Column('start_booking', db.DateTime(100))
     __finish_booking = db.Column('finish_booking',db.DateTime(100))
     __duration = db.Column('duration', db.Integer)
     __amount_people = db.Column('amount_people',db.Integer)
-    # TODO: Agregar clave foránea hacia la tabla de usuarios (user_id)
-    # TODO: Agregar clave foránea hacia la tabla de apartamentos (apartment_id)
 
     """Constructor
     Atributos:
@@ -24,7 +24,6 @@ class Booking(db.Model):
         self.__duration = duration
         self.__amount_people = amount_people
 
-    # es para obtener el atributo
 
     @hybrid_property
     def id(self)->int:
@@ -63,10 +62,3 @@ class Booking(db.Model):
 
     def __repr__(self) -> str:
         return f'Booking:(start_booking:{self.__start_booking}, finish_booking:{self.__finish_booking}, duration:{self.__duration}, amount_people:{self.__amount_people})'
-
-    # TODO: Revisar de qué manera se puede comparar un objeto de tipo Booking con otro objeto de tipo Booking
-    # def __eq__(self, __value:object ) -> bool:
-    #     return self.start_booking == __value.start_booking and self.finish_booking == __value.finish_booking
-
-    # dbeaver es como pgadmin
-

@@ -21,8 +21,8 @@ class UserRepository(Create):
     # def find_all(self) -> list:
     #     return db.session.query(self.__model).all()
     
-    # def find_by_email_address(self, email_address: str) -> User:
-    #     return db.session.query(self.__model).filter(self.__model.email_address == email_address).one()
+    def find_by_email(self, email: str) -> User:
+        return db.session.query(self.__model).filter(self.__model.email_address == email).one()
 
     def update(self, user: User, id: int) -> User:
         entity = self.find_by_id(id)

@@ -7,16 +7,16 @@ class RoleRepository(Create, Update, Read, Delete):
     def __init__(self):
         self.__model = Role
 
-    def create(self, entity: Role) -> Role: #se crea el rol (se persiste en la DB)
-        db.session.add(entity) #se agrega el rol a la DB
-        db.session.commit() #se guarda el rol en la DB/se confirman los cambios
-        return entity #se devuelve el rol creado
+    def create(self, entity: Role) -> Role:
+        db.session.add(entity)
+        db.session.commit()
+        return entity 
     
     def update(self, role: Role, id: int) -> Role:
         entity = self.find_by_id(id)
         entity.name = role.name
         entity.description = role.description
-        db.session.add(entity) #guarda la entidad sobreescrita con role(algo así)
+        db.session.add(entity) 
         db.session.commit()
         return entity
     

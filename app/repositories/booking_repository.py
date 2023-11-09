@@ -1,9 +1,9 @@
 from app.models import Booking
 from app import db
-from app.repositories import Create
+from app.repositories import Create, Read, Update
 
 
-class BookingRepository(Create):
+class BookingRepository(Create, Read, Update):
     
     def __init__(self):
         self.__model = Booking
