@@ -5,17 +5,23 @@ from sqlalchemy.orm.exc import NoResultFound
 class AuthService:
     def __init__(self):
         self.user_service = UserService()
-        self.security_service = SecurityService()
 
     def register(self, user):
         if self.existence(user.email_address):
             return None
         else:
-            user.password = self.security_service.generate_password(user.password)
+            user.password = SecurityService.generate_password(user.password)
             return self.user_service.create(user)
 
     def login(self, email, password):
-        pass
+        if self.existence(email):
+            user = self.user_service.find_by_email(email)
+            if SecurityService.check_password(user.password, password):
+                return "token"
+            else:
+                return None
+        else:
+            return None
 
     def existence(self, email):
         try:

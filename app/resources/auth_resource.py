@@ -21,4 +21,12 @@ def register():
 
 @auth.route('/login', methods=['POST'])
 def login():
-    pass
+    email = request.json['email']
+    password = request.json['password']
+    login = auth_service.login(email, password)
+    if not login:
+        response.add_data({"email": email, "password": password}).add_message('El email o la contraseña no son correctos.').add_status_code(400)
+        return jsonify(response.build()), response.status_code
+    else:
+        response.add_data({'token': login}).add_message('Inicio de sesion exitoso').add_status_code(200)
+        return jsonify(response.build()), response.status_code

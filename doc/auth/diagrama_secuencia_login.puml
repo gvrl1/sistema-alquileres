@@ -1,0 +1,41 @@
+@startuml Diagrama de secuencia - Login
+
+actor Usuario
+
+
+Usuario -> auth_resource: envía email y password para loguearse
+auth_resource -> auth_service: solicita el servicio de Login
+auth_service -> auth_service: llama al servicio de Existencia de Usuario
+auth_service -> user_service: solicita el servicio find_by_email
+user_service -> user_repository: solicita buscar si existe el usuario
+user_repository -> DB: busca la existencia del usuario por email
+
+database DB
+
+DB -> user_repository: devuelve la existencia o no del email
+user_repository -> user_service: devuelve la existencia o no del email
+user_service -> auth_service: devuelve la existencia o no del email
+auth_service -> auth_service: devuelve la existencia o no del email
+alt Email no existe
+    auth_service -> auth_resource: Devuelve un mensaje de error
+    auth_resource -> Usuario: Devuelve un mensaje de error
+else Email existe
+    auth_service -> user_service: solicita usuario con ese email
+    user_service -> user_repository: solicita buscar usuario con ese email
+    user_repository -> DB: busca el usuario con ese email
+    DB -> user_repository: devuelve el usuario con ese email
+    user_repository -> user_service: devuelve el usuario con ese email
+    user_service -> auth_service: devuelve el usuario con ese email
+    auth_service -> security_service: compara el password ingresado con el hash del password del usuario
+    secutity_service -> auth_service: devuelve true o false
+    alt True
+        auth_service -> auth_resource: devuelve mensaje "inicio de sesion exitoso"
+        auth_resource -> Usuario: muestra mensaje "inicio de sesion exitoso"
+    else False
+        auth_service -> auth_resource: devuelve un mensaje de error
+        auth_resource -> Usuario: devuelve un mensaje de error
+    end
+
+end
+
+@enduml

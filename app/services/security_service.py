@@ -18,6 +18,6 @@ class SecurityService:
         return generate_password_hash(password)
     
     @staticmethod
-    def check_password(password1: str, password2: str) -> bool:
-        """Compara los hashs de dos contraseñas."""
-        return check_password_hash(password1, password2)
+    def check_password(pwhash: str, password: str) -> bool:
+        """Compara el hash de la contraseña con la contraseña ingresada."""
+        return check_password_hash(pwhash, password)
