@@ -15,8 +15,8 @@ class Booking(db.Model):
     Atributos:
         start_booking (str): Fecha de inicio de la reserva, máximo 100 caracteres, formato: "YYYY-MM-DDTHH:mm:ss.sss".
         finish_booking (str): Fecha de finalización de la reserva, máximo 100 caracteres formato "YYYY-MM-DDTHH:mm:ss.sss".
-        duration (int): Duración de la reserva, máximo 3 dígitos.
-        amount_people (int): Cantidad de personas de la reserva, máximo 3 dígitos.
+        duration (int): Duración de la reserva, máximo 30 días.
+        amount_people (int): Cantidad de personas de la reserva, máximo 10 personas.
     """
     def __init__(self, start_booking: str, finish_booking: str, duration: int, amount_people: int):
         self.__start_booking = start_booking

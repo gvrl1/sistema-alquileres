@@ -18,7 +18,7 @@ class User(db.Model):
         name (str): Nombre del usuario, máximo 100 caracteres.
         lastname (str): Apellido del usuario, máximo 100 caracteres.
         phone_number (str): Número de teléfono del usuario, máximo 15 dígitos.
-        email_address (str): Dirección de correo electrónico del usuario, máximo 100 caracteres.
+        email_address (str): Dirección de correo electrónico del usuario.
         password (str): Contraseña del usuario, hash encriptado.
     """
 

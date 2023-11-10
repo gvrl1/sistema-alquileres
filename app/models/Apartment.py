@@ -17,7 +17,7 @@ class Apartment(db.Model):
     Atributos:
         number_of_apartment (int): Número del apartamento, máximo 3 dígitos.
         size (int): Tamaño del apartamento, máximo 3 dígitos.
-        amount_rooms (int): Cantidad de habitaciones del apartamento, máximo 3 dígitos.
+        amount_rooms (int): Cantidad de habitaciones del apartamento, máximo 4 habitaciones.
         features (str): Características del apartamento, máximo 500 caracteres.	
         availability (bool): Disponibilidad del apartamento, True si está disponible o False si no lo está.
         lease (float): Arriendo del apartamento, máximo 10 dígitos.
