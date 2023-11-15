@@ -5,19 +5,16 @@ from app.repositories import Create, Read, Update
 
 class BookingRepository(Create, Read, Update):
     
-    def __init__(self):
-        self.__model = Booking
-
     def create(self, entity: Booking) -> Booking:
         db.session.add(entity)
         db.session.commit()
         return entity
         
     def find_all(self) -> list:
-        return db.session.query(self.__model).all()
+        return db.session.query(Booking).all()
     
     def find_by_id(self, id: int) -> Booking:
-        return db.session.query(self.__model).filter(self.__model.id == id).one()
+        return Booking.query.get_or_404(id)
     
     def update(self, Booking: Booking, id: int) -> Booking:
             entity = self.find_by_id(id)
@@ -28,4 +25,3 @@ class BookingRepository(Create, Read, Update):
             db.session.add(entity)
             db.session.commit()
             return entity
-

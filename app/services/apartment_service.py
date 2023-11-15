@@ -26,5 +26,5 @@ class ApartmentService:
     def delete(self, id: int) -> Apartment:
         return self.__repo.delete(id)
     
-    def search(self, lease_min, lease_max):
+    def search(self, lease_min, lease_max) -> list:
         return self.__repo.search(lease_min, lease_max)

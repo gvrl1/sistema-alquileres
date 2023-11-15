@@ -4,9 +4,6 @@ from app.repositories import Create, Read, Update, Delete
 
 class RoleRepository(Create, Update, Read, Delete):
 
-    def __init__(self):
-        self.__model = Role
-
     def create(self, entity: Role) -> Role:
         db.session.add(entity)
         db.session.commit()
@@ -21,10 +18,10 @@ class RoleRepository(Create, Update, Read, Delete):
         return entity
     
     def find_by_id(self, id: int) -> Role:
-        return db.session.query(self.__model).filter(self.__model.id == id).one()
+        return Role.query.get_or_404(id)
     
     def find_all(self) -> list:
-        return db.session.query(self.__model).all()
+        return db.session.query(Role).all()
     
     def delete(self, id: int) -> Role:
         entity = self.find_by_id(id)

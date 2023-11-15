@@ -1,4 +1,4 @@
-from ..services import UserService, SecurityService
+from app.services import UserService, SecurityService
 from sqlalchemy.orm.exc import NoResultFound
 
 

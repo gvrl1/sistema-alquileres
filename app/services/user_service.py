@@ -15,6 +15,8 @@ class UserService:
         return self.__repo.create(entity)
     
     def update(self, entity: User, id: int) -> User:
+        from app.services import SecurityService
+        entity.password = SecurityService.generate_password(entity.password)
         return self.__repo.update(entity, id)
     
     def delete(self, id: int) -> User:

@@ -4,9 +4,6 @@ from app.repositories import Create, Read, Update, Delete
 
 
 class ApartmentRepository(Create, Read, Update, Delete):
-    
-    def __init__(self):
-        self.__model = Apartment
 
     def create(self, entity: Apartment) -> Apartment:
         db.session.add(entity)
@@ -14,7 +11,7 @@ class ApartmentRepository(Create, Read, Update, Delete):
         return entity
     
     def update(self, apartment: Apartment, id: int) -> Apartment:
-        entity = self.find_by_id(id)
+        entity = Apartment.query.get_or_404(id)
         entity.number_of_apartment = apartment.number_of_apartment
         entity.size = apartment.size
         entity.amount_rooms = apartment.amount_rooms
@@ -27,10 +24,10 @@ class ApartmentRepository(Create, Read, Update, Delete):
         return entity
     
     def find_by_id(self, id: int) -> Apartment:
-        return db.session.query(self.__model).filter(self.__model.id == id).one()
+        return Apartment.query.get_or_404(id)
     
     def find_all(self) -> list:
-        return db.session.query(self.__model).all()
+        return db.session.query(Apartment).all()
     
     def delete(self, id: int) -> Apartment:
         entity = self.find_by_id(id)
@@ -38,5 +35,5 @@ class ApartmentRepository(Create, Read, Update, Delete):
         db.session.commit()
         return entity
     
-    def search(self, lease_min, lease_max):
-        return db.session.query(self.__model).filter(self.__model.lease.between(lease_min, lease_max)).all()
+    def search(self, lease_min, lease_max) -> list:
+        return db.session.query(Apartment).filter(Apartment.lease.between(lease_min, lease_max)).all()

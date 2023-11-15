@@ -1,6 +1,5 @@
 from app.models import Booking
 from marshmallow import validate, fields, Schema, post_load
-from datetime import datetime
 from marshmallow import validate
 
 class BookingSchema(Schema):

@@ -1,7 +1,8 @@
 from flask import jsonify, Blueprint, request
-from ..dto import ResponseBuilder
-from ..mapping import UserSchema
-from ..services import AuthService
+from app.dto import ResponseBuilder
+from app.mapping import UserSchema
+from app.services import AuthService
+from app.validators import validate_with
 
 auth = Blueprint('auth', __name__)
 user_schema = UserSchema()
@@ -9,8 +10,9 @@ auth_service = AuthService()
 response = ResponseBuilder()
 
 @auth.route('/register', methods=['POST'])
-def register():
-    user = user_schema.load(request.json)
+@validate_with(UserSchema)
+def register(validated_data):
+    user = validated_data
     register = auth_service.register(user)
     if not register:
         response.add_data(user_schema.dump(user)).add_message('Error de registro. Ya existe un usuario con ese email.').add_status_code(400)
