@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from app.services import UserService
 from app.mapping import UserSchema
 from app.dto import ResponseBuilder
-from app.validators import validate_with
+from app.validators import validate_with, validate_exists
 
 ps = UserSchema(many=True) # Para devolver varios usuarios
 user = Blueprint('user', __name__)
@@ -19,11 +19,15 @@ def index():
 
 @user.route('/findall', methods=['GET'])
 def find_all():
+    if not user_service.find_all():
+        response.add_status_code(400).add_message('There are no users created!').add_data()
+        return jsonify(response.build()), response.status_code
     response.add_status_code(200).add_message('Users found!').add_data({"Users": ps.dump(user_service.find_all())})
     return jsonify(response.build()), response.status_code
     
 
 @user.route('/findbyid/<int:id>', methods=['GET'])
+@validate_exists(user_service, response)
 def find_by_id(id):
     response.add_status_code(200).add_message('User found!').add_data({"User": user_schema.dump(user_service.find_by_id(id))})
     return jsonify(response.build()), response.status_code
@@ -31,6 +35,7 @@ def find_by_id(id):
     
 @user.route('/update/<int:id>', methods=['PUT'])
 @validate_with(UserSchema)
+@validate_exists(user_service, response)
 def update(validated_data, id):
     user = validated_data
     response.add_status_code(200).add_message('User updated!').add_data(
@@ -40,6 +45,7 @@ def update(validated_data, id):
 
 
 @user.route('/delete/<int:id>', methods=['DELETE'])
+@validate_exists(user_service, response)
 def delete(id):
     response.add_status_code(200).add_message('User deleted!').add_data({"User deleted": user_schema.dump(user_service.delete(id))})
     return jsonify(response.build()), response.status_code

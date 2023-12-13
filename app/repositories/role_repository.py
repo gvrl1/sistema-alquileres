@@ -18,7 +18,7 @@ class RoleRepository(Create, Update, Read, Delete):
         return entity
     
     def find_by_id(self, id: int) -> Role:
-        return Role.query.get_or_404(id)
+        return Role.query.get(id)
     
     def find_all(self) -> list:
         return db.session.query(Role).all()

@@ -3,6 +3,9 @@ from sqlalchemy.orm.exc import NoResultFound
 
 
 class AuthService:
+    """
+    Este servicio se encarga de manejar la lógica de negocio referida a la autenticación.
+    """
     def __init__(self):
         self.user_service = UserService()
 

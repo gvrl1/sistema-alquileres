@@ -18,10 +18,6 @@ class Read(ABC):
     def find_by_id(self, id: int):
         pass
 
-    # @abstractmethod
-    # def find_by_username(self, username: str):
-    #     pass
-
 class Update(ABC):
 
     @abstractmethod

@@ -16,7 +16,7 @@ class UserRepository(Create, Read, Update, Delete):
         return entity
     
     def find_by_id(self, id: int) -> User:
-        return User.query.get_or_404(id)
+        return User.query.get(id)
     
     def find_all(self) -> list:
         return db.session.query(User).all()

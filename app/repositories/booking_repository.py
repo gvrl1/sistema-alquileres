@@ -14,14 +14,14 @@ class BookingRepository(Create, Read, Update):
         return db.session.query(Booking).all()
     
     def find_by_id(self, id: int) -> Booking:
-        return Booking.query.get_or_404(id)
+        return Booking.query.get(id)
     
     def update(self, Booking: Booking, id: int) -> Booking:
-            entity = self.find_by_id(id)
-            entity.start_booking = Booking.start_booking
-            entity.finish_booking = Booking.finish_booking
-            entity.duration = Booking.duration
-            entity.amount_people = Booking.amount_people
-            db.session.add(entity)
-            db.session.commit()
-            return entity
+        entity = self.find_by_id(id)
+        entity.start_booking = Booking.start_booking
+        entity.finish_booking = Booking.finish_booking
+        entity.duration = Booking.duration
+        entity.amount_people = Booking.amount_people
+        db.session.add(entity)
+        db.session.commit()
+        return entity

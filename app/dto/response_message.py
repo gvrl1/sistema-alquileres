@@ -12,7 +12,9 @@ class ResponseMessage:
 
 @dataclass(init=False)
 class ResponseBuilder:
-
+    """
+    Esta clase se encarga de construir un objeto ResponseMessage.
+    """
     def add_status_code(self, status_code: int = 200):
         self.status_code = status_code
         return self

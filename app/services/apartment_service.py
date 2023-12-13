@@ -1,13 +1,14 @@
 from app.models import Apartment
 from app.repositories import ApartmentRepository
 
-"""
-En este servicio van todas las funciones referidas al departamento.
-Buscar todos los departamentos, buscar un departamento por id, crear un departamento, 
-actualizar un departamento, eliminar un departamento.
-"""
+
 
 class ApartmentService:
+    """
+    En este servicio van todas las funciones referidas al departamento.
+    Buscar todos los departamentos, buscar un departamento por id, crear un departamento, 
+    actualizar un departamento, eliminar un departamento.
+    """
     def __init__(self):
         self.__repo = ApartmentRepository()
 

@@ -2,7 +2,7 @@ from flask import jsonify, Blueprint, request
 from app.services.apartment_service import ApartmentService
 from app.mapping.apartment_schema import ApartmentSchema
 from app.dto import ResponseBuilder
-from app.validators import validate_with
+from app.validators import validate_with, validate_exists
 
 apartment = Blueprint('apartment', __name__)
 
@@ -29,12 +29,14 @@ def create(validated_data):
 
 @apartment.route('/update/<int:id>', methods=['PUT'])
 @validate_with(ApartmentSchema)
+@validate_exists(apartment_service, response)
 def update(validated_data, id):
     apartment = validated_data
     return {"apartment updated": apartment_schema.dump(apartment_service.update(apartment, id))}, 200
 
 
 @apartment.route('/findbyid/<int:id>', methods=['GET'])
+@validate_exists(apartment_service, response)
 def find_by_id(id):
     response.add_status_code(200).add_message('Apartment found!').add_data({"apartment": apartment_schema.dump(apartment_service.find_by_id(id))})
     return jsonify(response.build()), response.status_code
@@ -42,12 +44,16 @@ def find_by_id(id):
     
 @apartment.route('/findall', methods=['GET'])
 def find_all():
+    if not apartment_service.find_all():
+        response.add_status_code(400).add_message('There are no departments created!').add_data()
+        return jsonify(response.build()), response.status_code
     response.add_status_code(200).add_message('Apartments found!').add_data({"apartments": ps.dump(apartment_service.find_all())})
     return jsonify(response.build()), response.status_code
 
 
 
 @apartment.route('/delete/<int:id>', methods=['DELETE'])
+@validate_exists(apartment_service, response)
 def delete(id):
     response.add_status_code(200).add_message('Apartment deleted!').add_data({"apartment deleted": apartment_schema.dump(apartment_service.delete(id))})
     return jsonify(response.build()), response.status_code

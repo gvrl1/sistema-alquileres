@@ -24,7 +24,7 @@ class ApartmentRepository(Create, Read, Update, Delete):
         return entity
     
     def find_by_id(self, id: int) -> Apartment:
-        return Apartment.query.get_or_404(id)
+        return Apartment.query.get(id)
     
     def find_all(self) -> list:
         return db.session.query(Apartment).all()

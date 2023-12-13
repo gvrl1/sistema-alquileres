@@ -1,12 +1,12 @@
 from app.models import User
 from app.repositories import UserRepository
 
-"""
-En este servicio van todas las funciones referidas al usuario.
-Buscar todos los usuarios, buscar un usuario por id, crear un usuario, actualizar un usuario, eliminar un usuario.
-"""
 
 class UserService:
+    """
+    En este servicio van todas las funciones referidas al usuario.
+    Buscar todos los usuarios, buscar un usuario por id, crear un usuario, actualizar un usuario, eliminar un usuario.
+    """
 
     def __init__(self):
         self.__repo = UserRepository()

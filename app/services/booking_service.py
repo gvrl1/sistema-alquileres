@@ -2,12 +2,12 @@ from app.models import Booking
 from app.repositories import BookingRepository
 from app.services import UserService, ApartmentService
 
-"""
-En este servicio van todas las funciones referidas a la reserva.
-Buscar todas las reservas, buscar una reserva por id, crear una reserva.
-"""
 
 class BookingService:
+    """
+    En este servicio van todas las funciones referidas a la reserva.
+    Buscar todas las reservas, buscar una reserva por id, crear una reserva.
+    """
     def __init__(self):
         self.__repo = BookingRepository()
 

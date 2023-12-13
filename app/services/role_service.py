@@ -1,13 +1,13 @@
 from app.models import Role
 from app.repositories import RoleRepository
 
-"""
-En este servicio van todas las funciones referidas al rol.
-Buscar todos los roles, buscar un rol por id, crear un rol, 
-actualizar un rol, eliminar un rol.
-"""
 
 class RoleService:
+    """
+    En este servicio van todas las funciones referidas al rol.
+    Buscar todos los roles, buscar un rol por id, crear un rol, 
+    actualizar un rol, eliminar un rol.
+    """
     def __init__(self):
         self.__repo = RoleRepository() #se crea el repositorio para poder usar sus métodos(se instancia)
 
