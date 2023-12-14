@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.services.booking_service import BookingService
+from app.services import BookingService, UserService, ApartmentService
 from app.mapping.booking_schema import BookingSchema
 from app.dto import ResponseBuilder
 from app.validators import validate_with, validate_exists
@@ -19,7 +19,9 @@ def create(validated_data):
     booking = validated_data
     user_id = request.args.get('user_id')
     apartment_id = request.args.get('apartment_id')
-    if not booking_service.find_by_id(user_id) or not booking_service.find_by_id(apartment_id):
+    user_service = UserService()
+    apartment_service = ApartmentService()
+    if not user_service.find_by_id(user_id) or not apartment_service.find_by_id(apartment_id):
         response.add_status_code(400).add_message('User or apartment not found!').add_data()
         return jsonify(response.build()), response.status_code
     response.add_status_code(200).add_message('Booking created!').add_data(
