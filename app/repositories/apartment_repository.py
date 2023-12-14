@@ -11,7 +11,7 @@ class ApartmentRepository(Create, Read, Update, Delete):
         return entity
     
     def update(self, apartment: Apartment, id: int) -> Apartment:
-        entity = Apartment.query.get_or_404(id)
+        entity = self.find_by_id(id)
         entity.number_of_apartment = apartment.number_of_apartment
         entity.size = apartment.size
         entity.amount_rooms = apartment.amount_rooms

@@ -32,7 +32,10 @@ def create(validated_data):
 @validate_exists(apartment_service, response)
 def update(validated_data, id):
     apartment = validated_data
-    return {"apartment updated": apartment_schema.dump(apartment_service.update(apartment, id))}, 200
+    response.add_status_code(200).add_message('Apartment updated!').add_data(
+        {"apartment updated": apartment_schema.dump(apartment_service.update(apartment, id))}
+    )
+    return jsonify(response.build()), response.status_code
 
 
 @apartment.route('/findbyid/<int:id>', methods=['GET'])
