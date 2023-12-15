@@ -1,0 +1,19 @@
+@startuml Diagrama de Secuencia - Búsqueda de todos los roles
+
+actor Administrador
+
+Administrador -> role_resource: solicita la búsqueda de todos los roles.
+role_resource -> role_service: solicita servicio find_all
+role_service -> role_repository: solicita búsqueda en DB.
+
+database AlquileresDB
+
+role_repository -> AlquileresDB: realiza la búsqueda en la DB.
+AlquileresDB -> role_repository: retorna los roles encontrados.
+role_repository -> role_service: retorna los roles encontrados.
+role_service -> role_resource: retorna los roles encontrados.
+role_resource -> role_schema: solicita deserializar objeto rol.
+role_schema -> role_resource: retorna objeto rol deserializado.
+role_resource -> Administrador: muestra objeto rol encontrado.
+
+@enduml

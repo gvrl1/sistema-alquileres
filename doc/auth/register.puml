@@ -1,0 +1,37 @@
+@startuml Diagrama de secuencia - Registrarse
+
+actor Usuario
+
+
+Usuario -> auth_resource: envía datos para registrarse
+auth_resource -> user_schema: valida datos y crea el objeto Usuario
+user_schema -> auth_resource: devuelve el objeto Usuario
+auth_resource -> auth_service: solicita el servicio de Registro
+auth_service -> auth_service: solicita el servicio de Existencia de Usuario
+auth_service -> user_service: solicita el servicio find_by_email
+user_service -> user_repository: solicita buscar si existe el usuario
+
+database DB
+
+user_repository -> DB: busca la existencia del usuario por email
+DB -> user_repository: devuelve la existencia o no del usuario
+user_repository -> user_service: devuelve la existencia o no del usuario
+user_service -> auth_service: devuelve la existencia o no del usuario
+auth_service -> auth_service: devuelve la existencia o no del usuario
+alt Usuario existe
+    auth_service -> auth_resource: Devuelve un mensaje de error
+    auth_resource -> Usuario: Devuelve un mensaje de error
+else Usuario no existe
+    auth_service -> security_service: solicita el servicio de Encriptación de Contraseña
+    security_service -> auth_service: devuelve la contraseña encriptada
+    auth_service -> user_service: solicita el servicio de Create
+    user_service -> user_repository: solicita el repositorio de Create
+    user_repository -> DB: crea el usuario en la base de datos
+    DB -> user_repository: devuelve el usuario creado
+    user_repository -> user_service: devuelve el usuario creado
+    user_service -> auth_service: devuelve el usuario creado
+    auth_service -> auth_resource: devuelve el usuario creado
+    auth_resource -> Usuario: devuelve el usuario creado
+end
+
+@enduml

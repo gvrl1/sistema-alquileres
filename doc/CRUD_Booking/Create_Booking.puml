@@ -1,0 +1,21 @@
+
+@startuml diagrama de secuencia crear reserva
+
+
+actor cliente
+cliente -> booking_resource: crear reserva
+booking_resource -> booking_schema: solicita convertir de json a objeto y validar
+booking_resource <- booking_schema: retorna el objeto reserva
+booking_resource -> booking_service: envia el objeto y solicita el servicio create
+booking_service -> booking_repository: Solicita agregar reserva a la DB
+database DB
+booking_repository -> DB: crear reserva en base de datos
+DB -> booking_repository: reserva creada (o no)
+booking_repository -> booking_service: reserva creada (o no)
+booking_service -> booking_resource: reserva creada (o no)
+booking_resource -> cliente: reserva creada (o no)
+
+
+
+@enduml
+

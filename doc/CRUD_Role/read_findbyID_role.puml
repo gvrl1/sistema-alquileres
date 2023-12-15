@@ -1,0 +1,19 @@
+@startuml Diagrama de Secuencia - Búsqueda de rol por ID
+
+actor Administrador
+
+Administrador -> role_resource: solicita la búsqueda de un rol por ID.
+role_resource -> role_service: envía id y solicita servicio find_by_id
+role_service -> role_repository: solicita búsqueda en DB.
+
+database AlquileresDB
+
+role_repository -> AlquileresDB: realiza la búsqueda en la DB.
+AlquileresDB -> role_repository: retorna el rol encontrado.
+role_repository -> role_service: retorna el rol encontrado.
+role_service -> role_resource: retorna el rol encontrado.
+role_resource -> role_schema: solicita deserializar objeto rol.
+role_schema -> role_resource: retorna objeto rol deserializado.
+role_resource -> Administrador: muestra objeto rol encontrado.
+
+@enduml

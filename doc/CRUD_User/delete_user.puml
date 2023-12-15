@@ -1,0 +1,19 @@
+@startuml Diagrama de Secuencia - Elimminación de usuario
+
+actor Administrador
+
+Administrador -> user_resource: solicita eliminar usuario.
+user_resource -> user_service: envía id y solicita servicio Delete.
+user_service -> user_repository: solicita eliminar usuario en la base de datos.
+
+database AlquileresDB
+
+user_repository -> AlquileresDB: elimina usuario en DB.
+AlquileresDB -> user_repository: confirma eliminación.
+user_repository -> user_service: retorna usuario eliminado.
+user_service -> user_resource: retorna usuario eliminado.
+user_resource -> user_schema: solicita deserialización del objeto.
+user_schema -> user_resource: retorna objeto deserializado.
+user_resource -> Administrador: muestra usuario eliminado.
+
+@enduml

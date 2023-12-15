@@ -1,0 +1,16 @@
+@startuml Diagrama de secuencia - Búsqueda de todos los departamentos
+
+actor Usuario
+Usuario -> ApartmentResource: solicita la búsqueda de todos los departamentos
+ApartmentResource -> ApartmentService: solicita servicio find_all
+ApartmentService -> ApartmentRepository: solicita la búsqueda en la base de datos
+database AlquileresDB
+ApartmentRepository -> AlquileresDB: realiza la búsqueda en la base de datos
+AlquileresDB -> ApartmentRepository: devuelve el listado de departamentos encontrados
+ApartmentRepository -> ApartmentService: devuelve el listado de departamentos encontrados
+ApartmentService -> ApartmentResource: devuelve el listado de departamentos encontrados
+ApartmentResource -> ApartmentSchema: solicita deserializar lista de departamentos
+ApartmentSchema -> ApartmentResource: devuelve lista de departamentos deserializada
+ApartmentResource -> Usuario: muestra los departamentos encontrados
+
+@enduml

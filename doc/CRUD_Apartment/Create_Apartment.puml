@@ -1,0 +1,19 @@
+@startuml Diagrama de secuencia - Creación de un departamento 
+
+actor Usuario
+Usuario -> ApartmentResource: Solicita crear departamento
+ApartmentResource -> ApartmentSchema: Valida entrada de datos
+ApartmentSchema -> ApartmentResource: Datos validados
+
+ApartmentResource -> ApartmentService: Solicita servicio create
+ApartmentService -> ApartmentRepository: Solicita creación de apartamento en la tabla Apartment
+database AlquileresDB
+ApartmentRepository -> AlquileresDB: Envía SQL para crear departamento
+AlquileresDB -> ApartmentRepository: Se confirma que fue creado el departamento
+ApartmentRepository -> ApartmentService: Envía entidad creada
+ApartmentService -> ApartmentResource: Envía entidad creada
+ApartmentResource -> ApartmentSchema: Solicita serializar la entidad
+ApartmentSchema -> ApartmentResource: Envía entidad serializada
+ApartmentResource -> Usuario: Envía departamento creado
+
+@enduml

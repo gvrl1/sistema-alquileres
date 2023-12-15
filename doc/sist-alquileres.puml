@@ -5,22 +5,25 @@ class User {
     - lastname
     - phone_number
     - email_address
+    - password
 }
 
 class Role {
+    - name
     - description
 }
 
 class Booking {
+    - user_id
+    - apartment_id
     - start_booking
     - finish_booking
     - duration
-    - num_booking
     - amount_people
 }
 
 class Apartment {
-    - number
+    - number_of_apartment
     - size
     - amount_rooms
     - features
@@ -29,8 +32,14 @@ class Apartment {
     - address
 }
 
-Booking -- User
-Booking -- Apartment
-User -- Role
+class users_roles {
+    - user_id
+    - role_id
+}
+
+User "1" -- "n" Booking : has
+Apartment "1" -- "n" Booking : has
+User "many" -- "many" users_roles : to
+Role "many" -- "many" users_roles : to
 
 @enduml

@@ -1,0 +1,19 @@
+@startuml Diagrama de Secuencia - Búsqueda de todos los usuarios
+
+actor Administrador
+
+Administrador -> user_resource: solicita la búsqueda de todos los usuarios.
+user_resource -> user_service: solicita servicio find_all
+user_service -> user_repository: solicita búsqueda en DB.
+
+database AlquileresDB
+
+user_repository -> AlquileresDB: realiza la búsqueda en la DB.
+AlquileresDB -> user_repository: retorna los usuarios encontrados.
+user_repository -> user_service: retorna los usuarios encontrados.
+user_service -> user_resource: retorna los usuarios encontrados.
+user_resource -> user_schema: solicita deserializar objeto usuario.
+user_schema -> user_resource: retorna objeto usuario deserializado.
+user_resource -> Administrador: muestra objeto usuario encontrado.
+
+@enduml

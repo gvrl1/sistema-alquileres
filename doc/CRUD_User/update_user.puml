@@ -1,0 +1,21 @@
+@startuml Diagrama de Secuencia - Actualización de usuario
+
+actor Administrador
+
+Administrador -> user_resource: solicita actualizar usuario.
+user_resource -> user_schema: verifica los datos y convierte a objeto.
+user_schema -> user_resource: devuelve el objeto.
+user_resource -> user_service: envia el objeto + id y solicita servicio Update.
+user_service -> user_repository: envia el objeto + id y solicita actualizar en tabla user.
+
+database AlquileresDB
+
+user_repository -> AlquileresDB: actualiza el usuario en la tabla user.
+AlquileresDB -> user_repository: confirma actualización.
+user_repository -> user_service: retorna el objeto actualizado.
+user_service -> user_resource: retorna el objeto actualizado.
+user_resource -> user_schema: solicita convertir el objeto a json.
+user_schema -> user_resource: retorna el objeto en json.
+user_resource -> Administrador: retorna el usuario actualizado.
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml Diagrama de Secuencia - Búsqueda de usuario por ID
+
+actor Administrador
+
+Administrador -> user_resource: solicita la búsqueda de un usuario por ID.
+user_resource -> user_service: envía id y solicita servicio find_by_id
+user_service -> user_repository: solicita búsqueda en DB.
+
+database AlquileresDB
+
+user_repository -> AlquileresDB: realiza la búsqueda en la DB.
+AlquileresDB -> user_repository: retorna el usuario encontrado.
+user_repository -> user_service: retorna el usuario encontrado.
+user_service -> user_resource: retorna el usuario encontrado.
+user_resource -> user_schema: solicita deserializar objeto usuario.
+user_schema -> user_resource: retorna objeto usuario deserializado.
+user_resource -> Administrador: muestra objeto usuario encontrado.
+
+@enduml
